@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "QuLJ1Q2XRYhuuKyXfbR2jI9UcFHOzIw/B7oPFCwGmf/i2hPrX6TKf6n2Dy2ONTP0+0mXkjbtPQjnrNpM/TxUeQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\chron\\source\\repos\\SetScreenResolution\\SetScreenResolution.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chron\\.nuget\\packages\\system.codedom\\7.0.0\\system.codedom.7.0.0.nupkg.sha512",
+    "C:\\Users\\chron\\.nuget\\packages\\system.management\\7.0.0\\system.management.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
