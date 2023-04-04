@@ -2,7 +2,7 @@
 
 Usage:
 
-SetScreenResolution.exe <width> <height>
+SetScreenResolution.exe 'width' 'height'
 
 example:
 
