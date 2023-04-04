@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Management;
+using System;
 using System.Runtime.InteropServices;
 
 namespace ScreenResolutionChanger
@@ -9,6 +7,9 @@ namespace ScreenResolutionChanger
     {
         [DllImport("user32.dll")]
         public static extern int ChangeDisplaySettings(ref DEVMODE lpDevMode, int dwFlags);
+
+        [DllImport("user32.dll")]
+        public static extern int EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
 
         [StructLayout(LayoutKind.Sequential)]
         public struct DEVMODE
@@ -69,10 +70,8 @@ namespace ScreenResolutionChanger
 
         public static void ChangeScreenResolution(int width, int height)
         {
-            DEVMODE dm = new DEVMODE();
-            dm.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
-
-            if (0 == EnumDisplaySettings(null, -1, ref dm))
+            DEVMODE dm = GetCurrentScreenSettings();
+            if (dm.dmSize == 0)
             {
                 Console.WriteLine("Failed to get the current screen settings.");
                 return;
@@ -89,11 +88,21 @@ namespace ScreenResolutionChanger
             }
             else
             {
-                Console.WriteLine("Failed to change the screen resolution.");
+                Console.WriteLine($"Failed to change the screen resolution. Error code: {result}");
             }
         }
 
-        [DllImport("user32.dll")]
-        public static extern int EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
+        public static DEVMODE GetCurrentScreenSettings()
+        {
+            DEVMODE dm = new DEVMODE();
+            dm.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
+
+            if (0 == EnumDisplaySettings(null, -1, ref dm))
+            {
+                dm.dmSize = 0;
+            }
+
+            return dm;
+        }
     }
 }
